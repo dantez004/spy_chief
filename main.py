@@ -1,6 +1,6 @@
-import threading
-import telebot
-from random import *
+import threading#для остановки
+import telebot#для работы бота
+from random import *#для логики ботa
 
 bot = telebot.TeleBot("7280096171:AAEFgQNfAv-bup-vVXUNKC7SOdk2oWJeWBo")
 stop_flag = threading.Event()
@@ -29,7 +29,8 @@ def handle_start(message):
 
     if len(register_players[chatid]) >= bot.get_chat_members_count(
             chatid) - 1:  # проверка регистрации всех пользователей чата
-        bot.send_message(chatid, "теперь жду /game")    #включает напоминалку как продолжить
+        #bot.send_message(chatid, "теперь жду /game")    #включает напоминалку как продолжить
+        handle_game(message)
         registered_users.update(register_players[chatid])  # обновление множества зарег.пользователей
 
 
