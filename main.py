@@ -2,7 +2,9 @@ import threading#для остановки
 import telebot#для работы бота
 from random import *#для логики ботa
 
-bot = telebot.TeleBot("7280096171:AAEFgQNfAv-bup-vVXUNKC7SOdk2oWJeWBo")
+bot = telebot.TeleBot(open("token.txt", 'r').readline().strip())
+print(bot)
+print(open("token.txt", 'r').readline().strip())
 stop_flag = threading.Event()
 register_players, registered_users, list_players = {}, set(), []
 
