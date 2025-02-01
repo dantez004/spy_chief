@@ -3,7 +3,7 @@ import telebot#для работы бота
 from random import *#для логики ботa
 
 bot = telebot.TeleBot(open("token.env", 'r').readline().strip())
-print(open("token.env", 'r').readline().strip()) #просто вывод токена
+print('token: ', open("token.env", 'r').readline().strip()) #просто вывод токена
 stop_flag = threading.Event()
 register_players, registered_users, list_players = {}, set(), []
 
