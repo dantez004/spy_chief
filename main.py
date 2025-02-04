@@ -79,10 +79,15 @@ def logic_game(message, flag_spy_opened=False):  # логика игры
 
 @bot.message_handler(commands=["voting"])  # голосование
 def send_vote(message):
-    if (len(register_players[message.chat.id]) > 2):
+    players = register_players[message.chat.id]
+    if (spy not in players):
+        players.append(spy)
+
+    print(f"voting: {players=}") #отладка
+
+    if (len(register_players[message.chat.id]) > 1):
         bot.send_poll(message.chat.id, "Кто шпион?",
-                      options=[bot.get_chat_member(message.chat.id, i).user.username for i in
-                               register_players[message.chat.id]])  # запуск опроса
+                      options=[bot.get_chat_member(message.chat.id, i).user.username for i in players])  # запуск опроса
     else:
         bot.send_message(message.chat.id, "Недостаточно игроков для опроса. Нужно минимум 3 (три) игрока")
 
@@ -96,7 +101,7 @@ def whospy(message):
         try:
             bot.unpin_chat_message(message.chat.id, order_of_player.message_id)
         except Exception as e:
-            print(f"ошибка при закреплении сообщения {order_of_player.message_id=}")
+            print(f"ошибка при откреплении сообщения {order_of_player.message_id=}")
     except:
         bot.send_message(message.chat.id, "Игра ещё не начиналась, шпиона ещё нет")
 
