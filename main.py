@@ -66,7 +66,8 @@ def logic_game(message, flag_spy_opened=False):  # логика игры
     players = register_players[message.chat.id]  # берёт список участников (записаны их id)
 
     if (flag_spy_opened):  # если шпион раскрыт, то добавляет его в список участников
-        players.append(spy)
+        if (spy not in players):
+            players.append(spy)
         return
 
     spy = choice(players)  # выбирает шпиона
